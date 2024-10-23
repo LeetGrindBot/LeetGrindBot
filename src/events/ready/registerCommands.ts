@@ -20,6 +20,7 @@ module.exports = async (client: any) => {
 
             if (existingCommand) {
                 if (localCommand.deleted) {
+                    console.log('ici3')
                     await applicationCommands.delete(existingCommand.id);
                     console.log(`Application command ${commandName} has been deleted.`);
                     continue;
@@ -31,6 +32,7 @@ module.exports = async (client: any) => {
                     console.log(`Application command ${commandName} has been edited.`);
                 }
             } else {
+                console.log('ici2')
                 if (localCommand.deleted) {
                     console.log(`Application command ${commandName} has been skipped, since property "deleted" is set to "true".`);
                     continue;

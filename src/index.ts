@@ -1,6 +1,5 @@
+import {Client, GatewayIntentBits} from "discord.js";
 import eventHandler from "./handlers/eventHandler";
-
-const { Client, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
     intents: [
