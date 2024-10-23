@@ -1,6 +1,8 @@
-import { CronJob } from 'cron';
+import {CronJob} from 'cron';
 import getRandomProblem from "../utils/scraper"
 import config from "../config/index";
+import createEmbeds from "../embeds/leetCodeEmbeds";
+import {getRandomDifficulty} from "./getRandom";
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
@@ -24,8 +26,9 @@ export async function sendNewProblem(client : any) {
         return;
     }
 
-    const [code, text, url] = await getRandomProblem(1);
-    
+    const difficulty: number = getRandomDifficulty();
+    const [code, text, url] = await getRandomProblem(difficulty);
+
     const guild = client.guilds.cache.get(guildId);
     if (!guild) {
         console.error('Guild not found!');
@@ -36,7 +39,5 @@ export async function sendNewProblem(client : any) {
         console.error('Channel not found!');
         return;
     }
-    channel.send("" + url + " / " + code + " / " + text)
-                .then(() => console.log('Message sent successfully'))
-                .catch(console.error);
+    await channel.send({embeds: [createEmbeds(url, text, difficulty)]});
 }

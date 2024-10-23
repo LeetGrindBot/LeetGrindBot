@@ -1,6 +1,8 @@
 import {SlashCommandBuilder, TextChannel} from "discord.js";
 import getRandomProblem from "../../utils/scraper";
-import getRandomDifficulty from "../../utils/getRandomDifficulty";
+import {getRandomDifficulty} from "../../utils/getRandom";
+import createEmbeds from "../../embeds/leetCodeEmbeds"
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -44,7 +46,8 @@ module.exports = {
                 return;
             }
 
-            await channel.send(`Test Bateau ok my boyyyyy!: ${url} / ${code} / ${text}`);
+            console.log('Sending message...');
+            await channel.send({embeds: [createEmbeds(url, text, choose)]});
             console.log('Message sent successfully');
 
         } catch (err) {
