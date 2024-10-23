@@ -1,6 +1,8 @@
 import {Client, GatewayIntentBits} from "discord.js";
 import eventHandler from "./handlers/eventHandler";
 
+import config from "./config/index";
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -10,8 +12,8 @@ const client = new Client({
     ],
 });
 
-eventHandler(client);
-
-client.login("").then(() => {
+client.login(config.discordToken).then(() => {
     console.log("Logged in!");
 }).catch(console.error);
+
+eventHandler(client);
