@@ -9,7 +9,7 @@ const diffMap: { [key: string]: string } = {
 
 export default async function getRandomProblem(difficulty: number) {
     const diffStr = diffMap[difficulty];
-    const browser = await firefox.launch({headless: false});
+    const browser = await firefox.launch({headless: true});
     const context = await browser.newContext();
     const page = await context.newPage();
 
