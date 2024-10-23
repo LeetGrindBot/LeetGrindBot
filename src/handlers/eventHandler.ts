@@ -1,8 +1,8 @@
-import {path} from 'path';
-import {getAllFiles} from '../utils/fileUtils';
+import path from 'path';
+import getAllFiles from '../utils/getAllFiles'
 
-module.exports = (client: any) => {
-    const eventFolders = getAlllFiles(path.join(__dirname, "..", "events"), true);
+const eventHandler = (client: any) => {
+    const eventFolders = getAllFiles(path.join(__dirname, "..", "events"), true);
 
     for (const eventFolder of eventFolders) {
         const eventFiles = getAllFiles(eventFolder);
@@ -14,9 +14,15 @@ module.exports = (client: any) => {
         client.on(eventName, async(...args: any) => {
             for (const eventFile of eventFiles) {
                 const eventFunction = require(eventFile);
-                await eventFunction(client, ...args);
+                if (typeof eventFunction === 'function') {
+                    await eventFunction(client, ...args);
+                } else {
+                    console.error(`Export from ${eventFile} is not a function`);
+                }
             }
         });
 
     }
 }
+
+export default eventHandler;

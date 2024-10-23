@@ -1,17 +1,18 @@
-import { Client, GatewayIntentBits } from 'discord.js';
+import eventHandler from "./handlers/eventHandler";
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const { Client, GatewayIntentBits } = require("discord.js");
 
-client.once('ready', () => {
-    console.log('Bot est prêt!');
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
 });
 
-client.on('messageCreate', (message) => {
-    if (message.author.bot) return;
+eventHandler(client);
 
-    if (message.content === '!ping') {
-        message.channel.send('Pong!');
-    }
-});
-
-client.login('');
+client.login("").then(() => {
+    console.log("Logged in!");
+}).catch(console.error);
