@@ -3,6 +3,7 @@ import getRandomProblem from "../utils/scraper"
 import config from "../config/index";
 import createEmbeds from "../embeds/leetCodeEmbeds";
 import {getRandomDifficulty} from "./getRandom";
+import log from "../logger";
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
@@ -18,11 +19,11 @@ export async function sendNewProblem(client : any) {
     const guildId = config.guildId;
     const channelId = config.channelId;
     if(guildId == "") {
-        console.error("Empty guildId");
+        log.error("Empty guildId");
         return;
     }
     if(channelId == "") {
-        console.error("Empty channelId");
+        log.error("Empty channelId");
         return;
     }
 
@@ -31,12 +32,12 @@ export async function sendNewProblem(client : any) {
 
     const guild = client.guilds.cache.get(guildId);
     if (!guild) {
-        console.error('Guild not found!');
+        log.error('Guild not found!');
         return;
     }
     const channel = guild.channels.cache.get(channelId);
     if (!channel) {
-        console.error('Channel not found!');
+        log.error('Channel not found!');
         return;
     }
     await channel.send({embeds: [createEmbeds(url, text, difficulty)]});

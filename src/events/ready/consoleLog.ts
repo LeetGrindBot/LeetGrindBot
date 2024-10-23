@@ -1,3 +1,5 @@
+import log from "../../logger";
+
 module.exports = async (client: any) => {
-    console.log(`Logged in as ${client.user.tag}`);
+    log.info(`Logged in as ${client.user.tag}`);
 }

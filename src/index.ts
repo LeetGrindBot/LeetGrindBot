@@ -1,10 +1,12 @@
 import {Client, GatewayIntentBits} from "discord.js";
-import eventHandler from "./handlers/eventHandler";
 
+import eventHandler from "./handlers/eventHandler";
 import createJob from "./utils/cronjob";
 import config from "./config/index";
+import log from "./logger";
+import {CronJob} from "cron";
 
-const client = new Client({
+const client : Client<any> = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
@@ -13,11 +15,12 @@ const client = new Client({
     ],
 });
 
-client.login(config.discordToken).then(() => {
-    console.log("Logged in!");
+client.login(config.discordToken).then(() :void => {
+   log.info('Bot is now connected to Discord');
+
 }).catch(console.error);
 
 eventHandler(client);
 
-const job = createJob(client);
+const job: CronJob = createJob(client);
 job.start();
