@@ -58,6 +58,3 @@ async function bruteForce(page: any, diffStr: any) {
 
     return [problemCode, problemText, problemUrl];
 }
-while(true) {
-    getRandomProblem(1);
-}
