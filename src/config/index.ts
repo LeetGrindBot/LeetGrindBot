@@ -10,5 +10,6 @@ if (envFound.error) {
 }
 
 export default {
+    mode: process.env.MODE,
     discordToken: process.env.DISCORD_TOKEN
 };

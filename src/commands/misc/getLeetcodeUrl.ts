@@ -1,76 +1,55 @@
-import {PermissionFlagsBits, SlashCommandBuilder} from "discord.js";
+import {SlashCommandBuilder, TextChannel} from "discord.js";
 import getRandomProblem from "../../utils/scraper";
-
-const difficulties = [
-    {
-        name: "easy",
-        value: 1,
-    },
-    {
-        name: "medium",
-        value: 2,
-    },
-    {
-        name: "hard",
-        value: 3,
-    },
-];
+import getRandomDifficulty from "../../utils/getRandomDifficulty";
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("getleetcodeurl")
-        .setDescription("Test if everything works.2")
+        .setDescription("Test if everything works.3")
         .addStringOption(option =>
-            option.setName("difficulty")
-                .setDescription("Test if everything works.")
-                .setRequired(true)
-                .setAutocomplete(true))
-        .toJSON()
-    ,
+            option.setName('difficulty')
+                .setDescription('choose difficulty (empty = random) between easy, medium, hard'))
+        .toJSON(),  // Ensure the command data is correctly transformed to JSON
     testMode: false,
     devOnly: false,
     deleted: false,
     userPermissions: [],
     botPermissions: [],
 
-    run: async (client: any, interaction:any) => {
+    run: async (client: any, interaction: any) => {
         try {
-            interaction.reply('Un nouveau lien est entrain de se charger...');
-            const [code, text, url] = await getRandomProblem(3);
+            const difficulty = interaction.options.getString('difficulty');
+            let choose: number = getRandomDifficulty();
+            switch (difficulty) {
+                case 'easy':
+                    choose = 1;
+                    break
+                case 'medium':
+                    choose = 2;
+                    break
+                case 'hard':
+                    choose = 3;
+                    break
+            }
+
+            interaction.reply('Un nouveau test leetCode est entrain de charger sur la difficulté suivante : ' + choose);
+
+            const [code, text, url] = await getRandomProblem(choose);
+
             const guild = client.guilds.cache.get(interaction.guildId);
-            console.log(guild.id);
-            const channel = guild.channels.cache.get(interaction.channelId);
+            const channel: TextChannel = guild.channels.cache.get(interaction.channelId);
 
             if (!channel) {
                 console.error('Channel not found!');
                 return;
             }
 
-            channel.send("Test Bateau ok my boyyyyy!: " + url + " / " + code + " / " + text)
-                .then(() => console.log('Message sent successfully'))
-                .catch(console.error);
+            await channel.send(`Test Bateau ok my boyyyyy!: ${url} / ${code} / ${text}`);
+            console.log('Message sent successfully');
 
         } catch (err) {
             console.log("[ERROR] Error in your exampleCmd.js run function:");
             console.log(err);
         }
     },
-
-    autocomplete: async () => {
-        try {
-            const options = [
-                {
-                    name: "test",
-                    description: "Test if everything works.2",
-                    type: 1,
-                    options: [],
-                },
-            ];
-            return options;
-
-        } catch (err) {
-            console.log("[ERROR]" + "Error in your exampleCmd.js autocomplete function:");
-            console.log(err);
-        }
-    }
 };
