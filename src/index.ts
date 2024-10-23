@@ -1,6 +1,7 @@
 import {Client, GatewayIntentBits} from "discord.js";
 import eventHandler from "./handlers/eventHandler";
 
+import createJob from "./utils/cronjob";
 import config from "./config/index";
 
 const client = new Client({
@@ -17,3 +18,6 @@ client.login(config.discordToken).then(() => {
 }).catch(console.error);
 
 eventHandler(client);
+
+const job = createJob(client);
+job.start();
