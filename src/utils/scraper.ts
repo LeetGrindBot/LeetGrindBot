@@ -9,7 +9,7 @@ const diffMap: { [key: string]: string } = {
 
 export default async function getRandomProblem(difficulty: number) {
     const diffStr = diffMap[difficulty];
-    const browser = await firefox.launch({headless: false});
+    const browser = await firefox.launch({headless: true});
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -30,7 +30,7 @@ async function bruteForce(page: any, diffStr: any) {
         const problemName = res["data"]["data"]["randomQuestion"]["titleSlug"];
         problemUrl = `https://leetcode.com/problems/${problemName}/description/`;
         await page.goto(problemUrl);
-        
+
         try {
             await page.waitForSelector('[class*="text-difficulty-"]', { timeout: 3000 });
         } catch {
