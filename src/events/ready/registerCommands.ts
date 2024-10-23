@@ -2,25 +2,25 @@ import commandComparing from "../../utils/commandComparing";
 import getApplicationCommands from "../../utils/getApplicationCommands";
 import getLocalCommands from "../../utils/getLocalCommands";
 import {testServerId} from "../../config.json";
+import config from "../../config";
 
 module.exports = async (client: any) => {
     try {
         let guildId = null;
 
-        process.env.MODE === "dev"
-            ? guildId = testServerId
-            : guildId;
+        if (config.mode === "dev") {
+            guildId = testServerId;
+        }
 
         const localCommands = getLocalCommands();
         const applicationCommands = await getApplicationCommands(client, guildId);
 
         for (const localCommand of localCommands) {
             const commandName = localCommand.data.name;
-            const existingCommand = await applicationCommands.cache.find((cmd: any) => cmd.name === commandName);
+            const existingCommand = applicationCommands.cache.find((cmd: any) => cmd.name === commandName);
 
             if (existingCommand) {
                 if (localCommand.deleted) {
-                    console.log('ici3')
                     await applicationCommands.delete(existingCommand.id);
                     console.log(`Application command ${commandName} has been deleted.`);
                     continue;
@@ -32,7 +32,6 @@ module.exports = async (client: any) => {
                     console.log(`Application command ${commandName} has been edited.`);
                 }
             } else {
-                console.log('ici2')
                 if (localCommand.deleted) {
                     console.log(`Application command ${commandName} has been skipped, since property "deleted" is set to "true".`);
                     continue;
@@ -43,7 +42,7 @@ module.exports = async (client: any) => {
             }
         }
     } catch (err) {
-        console.log("[ERROR]" + "Error in your registerCommands.js file:");
+        console.log("[ERROR] Error in your registerCommands.js file:");
         console.log(err);
     }
-}
+};
