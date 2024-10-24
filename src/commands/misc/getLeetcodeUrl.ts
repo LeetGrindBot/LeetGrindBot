@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, TextChannel} from "discord.js";
-import getRandomProblem from "../../utils/scraper";
+import getRandomProblem from "../../utils/getProblem";
 import {getRandomDifficulty} from "../../utils/getRandom";
 import createEmbeds from "../../embeds/leetCodeEmbeds"
 import log from "../../logger";
