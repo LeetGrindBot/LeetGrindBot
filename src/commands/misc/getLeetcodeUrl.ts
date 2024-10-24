@@ -2,7 +2,7 @@ import {SlashCommandBuilder, TextChannel} from "discord.js";
 import getRandomProblem from "../../utils/scraper";
 import {getRandomDifficulty} from "../../utils/getRandom";
 import createEmbeds from "../../embeds/leetCodeEmbeds"
-
+import log from "../../logger";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -42,17 +42,14 @@ module.exports = {
             const channel: TextChannel = guild.channels.cache.get(interaction.channelId);
 
             if (!channel) {
-                console.error('Channel not found!');
+                log.error('Channel not found!');
                 return;
             }
 
-            console.log('Sending message...');
             await channel.send({embeds: [createEmbeds(url, text, choose)]});
-            console.log('Message sent successfully');
 
         } catch (err) {
-            console.log("[ERROR] Error in your exampleCmd.js run function:");
-            console.log(err);
+            log.error("[ERROR] Error in your exampleCmd.js run function: " + err);
         }
     },
 };

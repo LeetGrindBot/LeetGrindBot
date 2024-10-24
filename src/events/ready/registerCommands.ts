@@ -3,6 +3,7 @@ import getApplicationCommands from "../../utils/getApplicationCommands";
 import getLocalCommands from "../../utils/getLocalCommands";
 import {testServerId} from "../../config.json";
 import config from "../../config";
+import log from "../../logger";
 
 module.exports = async (client: any) => {
     try {
@@ -22,27 +23,26 @@ module.exports = async (client: any) => {
             if (existingCommand) {
                 if (localCommand.deleted) {
                     await applicationCommands.delete(existingCommand.id);
-                    console.log(`Application command ${commandName} has been deleted.`);
+                    log.info(`Application command ${commandName} has been deleted.`);
                     continue;
                 }
 
                 const differentCommand = commandComparing(localCommand.data, existingCommand);
                 if (differentCommand) {
                     await applicationCommands.edit(existingCommand.id, differentCommand);
-                    console.log(`Application command ${commandName} has been edited.`);
+                    log.info(`Application command ${commandName} has been edited.`);
                 }
             } else {
                 if (localCommand.deleted) {
-                    console.log(`Application command ${commandName} has been skipped, since property "deleted" is set to "true".`);
+                    log.info(`Application command ${commandName} has been skipped, since property "deleted" is set to "true".`);
                     continue;
                 }
 
                 await applicationCommands.create(localCommand.data);
-                console.log(`Application command ${commandName} has been registered.`);
+                log.info(`Application command ${commandName} has been registered.`);
             }
         }
     } catch (err) {
-        console.log("[ERROR] Error in your registerCommands.js file:");
-        console.log(err);
+        log.error("[ERROR] Error in your registerCommands.js file: " + err);
     }
 };

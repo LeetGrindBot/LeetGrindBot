@@ -2,6 +2,7 @@ import {EmbedBuilder} from "discord.js";
 import {developersIds, testServerId} from "../../config.json";
 import mConfig from "../../messageConfig.json";
 import getLocalCommands from "../../utils/getLocalCommands";
+import log from "../../logger";
 
 module.exports = async (client: any, interaction: any) => {
     if (!interaction.isChatInputCommand() && !interaction.isAutocomplete()) return;
@@ -68,7 +69,6 @@ module.exports = async (client: any, interaction: any) => {
             await commandObject.autocomplete(client, interaction);
         }
     } catch (err) {
-        console.log("[ERROR]" + "Error in your chatInputCommandValidator.js file:");
-        console.log(err);
+        log.error("[ERROR]" + "Error in your chatInputCommandValidator.js file :" + err);
     }
 };
