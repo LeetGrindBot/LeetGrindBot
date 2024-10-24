@@ -48,5 +48,3 @@ async function bruteForce(diffStr: any) : Promise<any[]> {
     }
     return [code, title, titleSlug, url, rate];
 }
-
-getRandomProblem(1);
