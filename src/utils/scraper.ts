@@ -1,5 +1,12 @@
-import {firefox} from "playwright";
 import axios from "axios";
+
+interface LeetCodeProblem {
+    code: number;
+    title: string;
+    titleSlug: string;
+    url: string;
+    rate: number;
+}
 
 const diffMap: { [key: string]: string } = {
     1: "EASY",
@@ -7,54 +14,39 @@ const diffMap: { [key: string]: string } = {
     3: "HARD"
 };
 
-export default async function getRandomProblem(difficulty: number) {
+export default async function getRandomProblem(difficulty: number) : Promise<LeetCodeProblem> {
     const diffStr = diffMap[difficulty];
-    const browser = await firefox.launch({headless: true});
-    const context = await browser.newContext();
-    const page = await context.newPage();
-
-    const [code, text, url] = await bruteForce(page, diffStr);
-    await page.close();
-    await context.close();
-    await browser.close();
-    return [code, text, url];
+    const [code, title, titleSlug, url, rate] = await bruteForce(diffStr);
+    const res : LeetCodeProblem = {
+        code: code, 
+        title: title, 
+        titleSlug: titleSlug, 
+        url: url, 
+        rate: rate
+    };
+    return res;
 }
 
-async function bruteForce(page: any, diffStr: any) {
-    let problemCode, problemText, problemUrl;
+async function bruteForce(diffStr: any) : Promise<any[]> {
+    let code, title, titleSlug, url, rate;
     let done = false;
     while(!done) {
         const res = await axios.post("https://leetcode.com/graphql/",
-            {"query":"\n    query randomQuestion($categorySlug: String, $filters: QuestionListFilterInput) {\n  randomQuestion(categorySlug: $categorySlug, filters: $filters) {\n    titleSlug\n  }\n}\n    ","variables":{"categorySlug":"all-code-essentials","filters":{"orderBy":"FRONTEND_ID","sortOrder":"DESCENDING","difficulty": diffStr}},"operationName":"randomQuestion"}
+            {"query":"\n    query randomQuestion($categorySlug: String, $filters: QuestionListFilterInput) {\n  randomQuestion(categorySlug: $categorySlug, filters: $filters) { questionId title titleSlug difficulty isPaidOnly acRate }\n}\n    ","variables":{"categorySlug":"all-code-essentials","filters":{"orderBy":"FRONTEND_ID","sortOrder":"DESCENDING","difficulty": diffStr}},"operationName":"randomQuestion"}
         );
-        const problemName = res["data"]["data"]["randomQuestion"]["titleSlug"];
-        problemUrl = `https://leetcode.com/problems/${problemName}/description/`;
-        await page.goto(problemUrl);
-
-        try {
-            await page.waitForSelector('[class*="text-difficulty-"]', { timeout: 3000 });
-        } catch {
-            continue
-        }
-
-        let selector = `div.text-difficulty-${diffStr.toLowerCase()}`;
-        let difficultyTagLoc = page.locator(selector);
-        let existsDiffTag = await difficultyTagLoc.isVisible();
-        if(!existsDiffTag) {
+        const form = res["data"]["data"]["randomQuestion"];
+        titleSlug = form["titleSlug"];
+        url = `https://leetcode.com/problems/${titleSlug}/description/`;
+        const isPremium = form["isPaidOnly"];
+        if(isPremium) {
             continue;
         }
-
-        const premiumLoc = page.locator("div.backdrop-blur-sm ");
-        const existsPremiumTag = await premiumLoc.isVisible();
-        if(existsPremiumTag) {
-            continue;
-        }
-
-        const problemLoc = page.locator("a.cursor-text");
-        [problemCode, problemText] = (await problemLoc.innerText()).split(".");
-        problemText = problemText.substring(1, problemText.length);
-        break;
+        code = form["questionId"];
+        title = form["title"];
+        rate = form["acRate"];
+        done = true;
     }
-
-    return [problemCode, problemText, problemUrl];
+    return [code, title, titleSlug, url, rate];
 }
+
+getRandomProblem(1);
