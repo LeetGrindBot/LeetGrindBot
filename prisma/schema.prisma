@@ -1,0 +1,37 @@
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model LeetCodeLink {
+  idDiscord        String         @id @unique
+  linkDate         DateTime       @default(now())
+  leetCodeUsername String         @unique
+  LeetCodeId       HistoryPoint[]
+}
+
+model HistoryPoint {
+  idDiscord        String         @id @unique
+  idHistoryProblem String
+  titleSlug        String
+  Points           Int
+  createdDate      DateTime       @default(now())
+  LeetCodeLink     LeetCodeLink   @relation(fields: [idDiscord], references: [idDiscord], onDelete: Cascade, onUpdate: Cascade)
+  HistoryProblem   HistoryProblem @relation(fields: [titleSlug], references: [titleSlug], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model HistoryProblem {
+  titleSlug    String         @id @unique
+  title        String
+  code         String
+  url          String
+  createdDate  DateTime       @default(now())
+  HistoryPoint HistoryPoint[]
+}

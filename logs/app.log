@@ -1,3 +1,17 @@
 2024-10-23T18:29:11.768Z [INFO]: Bot is now connected to Discord
 2024-10-23T22:30:53.662Z [INFO]: Bot is now connected to Discord
 2024-10-23T22:30:53.787Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-24T00:01:01.089Z [INFO]: Bot is now connected to Discord
+2024-10-24T00:01:01.212Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-24T00:14:22.473Z [INFO]: Bot is now connected to Discord
+2024-10-24T00:14:22.602Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-24T00:14:23.881Z [INFO]: Application command linkaccount has been registered.
+2024-10-24T00:21:17.814Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientKnownRequestError: 
+Invalid `prisma.leetCodeLink.create()` invocation in
+/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:6:31
+
+  3 const prisma = new PrismaClient();
+  4 
+  5 export async function linkAccount(username: string, discordId: string) {
+→ 6     await prisma.leetCodeLink.create(
+Unique constraint failed on the fields: (`idDiscord`)
