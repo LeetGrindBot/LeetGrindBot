@@ -31,8 +31,10 @@ async function bruteForce(diffStr: any) : Promise<any[]> {
     let code, title, titleSlug, url, rate;
     let done = false;
     while(!done) {
+        const q = `query randomQuestion($categorySlug: String, $filters: QuestionListFilterInput) { randomQuestion(categorySlug: $categorySlug, filters: $filters) { questionId title titleSlug difficulty isPaidOnly acRate } }`;
+        const variables = {"categorySlug":"all-code-essentials","filters":{"orderBy":"FRONTEND_ID","sortOrder":"DESCENDING","difficulty": diffStr}};
         const res = await axios.post("https://leetcode.com/graphql/",
-            {"query":"\n    query randomQuestion($categorySlug: String, $filters: QuestionListFilterInput) {\n  randomQuestion(categorySlug: $categorySlug, filters: $filters) { questionId title titleSlug difficulty isPaidOnly acRate }\n}\n    ","variables":{"categorySlug":"all-code-essentials","filters":{"orderBy":"FRONTEND_ID","sortOrder":"DESCENDING","difficulty": diffStr}},"operationName":"randomQuestion"}
+            {"query": q, "variables": variables, "operationName":"randomQuestion"}
         );
         const form = res["data"]["data"]["randomQuestion"];
         titleSlug = form["titleSlug"];
