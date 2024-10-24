@@ -1,5 +1,5 @@
 import {CronJob} from 'cron';
-import getRandomProblem from "../utils/scraper"
+import getRandomProblem from "../utils/getProblem"
 import config from "../config/index";
 import createEmbeds from "../embeds/leetCodeEmbeds";
 import {getRandomDifficulty} from "./getRandom";
