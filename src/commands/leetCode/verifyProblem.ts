@@ -27,7 +27,7 @@ module.exports = {
             await addPoints(discordId, titleSlug, points);
             await interaction.reply("Le problème a été vérifié");
         } catch(err) {
-            log.error("[ERROR - COMMAND - linkAccount] : " + err);
+            log.error("[ERROR - COMMAND - verifiyAccount] : " + err);
         }
     },
 };
