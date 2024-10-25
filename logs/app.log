@@ -6,12 +6,12 @@
 2024-10-24T00:14:22.473Z [INFO]: Bot is now connected to Discord
 2024-10-24T00:14:22.602Z [INFO]: Logged in as y2 dev boat#0873
 2024-10-24T00:14:23.881Z [INFO]: Application command linkaccount has been registered.
-2024-10-24T00:21:17.814Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientKnownRequestError: 
+2024-10-24T00:21:17.814Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientKnownRequestError:
 Invalid `prisma.leetCodeLink.create()` invocation in
 /Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:6:31
 
   3 const prisma = new PrismaClient();
-  4 
+  4
   5 export async function linkAccount(username: string, discordId: string) {
 → 6     await prisma.leetCodeLink.create(
 Unique constraint failed on the fields: (`idDiscord`)
@@ -21,12 +21,12 @@ Unique constraint failed on the fields: (`idDiscord`)
 2024-10-25T09:16:56.297Z [INFO]: Logged in as y2 dev boat#0873
 2024-10-25T09:18:40.228Z [INFO]: Bot is now connected to Discord
 2024-10-25T09:18:40.345Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T09:18:45.900Z [ERROR]: [ERROR] Error in your exampleCmd.js run function: PrismaClientValidationError: 
+2024-10-25T09:18:45.900Z [ERROR]: [ERROR] Error in your exampleCmd.js run function: PrismaClientValidationError:
 Invalid `prisma.historyProblem.create()` invocation in
 /Users/alexscdt/Documents/Project/LeetGrindbot/src/database/historyProblem.ts:7:33
 
   4 const prisma = new PrismaClient();
-  5 
+  5
   6 export async function createProblem(data: LeetCodeProblemInterface) {
 → 7     await prisma.historyProblem.create({
           data: {
@@ -50,89 +50,3 @@ Argument `code`: Invalid value provided. Expected Int, provided String.
 
 2024-10-25T09:27:46.284Z [INFO]: Bot is now connected to Discord
 2024-10-25T09:27:46.433Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T15:38:21.658Z [INFO]: Bot is now connected to Discord
-2024-10-25T15:38:21.779Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T15:38:40.411Z [ERROR]: 
-Invalid `prisma.historyProblem.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/historyProblem.ts:7:33
-
-  4 const prisma = new PrismaClient();
-  5 
-  6 export async function createProblem(data: LeetCodeProblemInterface) {
-→ 7     await prisma.historyProblem.create(
-Can't reach database server at `localhost:4722`
-
-Please make sure your database server is running at `localhost:4722`.
-2024-10-25T15:39:04.358Z [ERROR]: 
-Invalid `prisma.historyProblem.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/historyProblem.ts:7:33
-
-  4 const prisma = new PrismaClient();
-  5 
-  6 export async function createProblem(data: LeetCodeProblemInterface) {
-→ 7     await prisma.historyProblem.create(
-Can't reach database server at `localhost:4722`
-
-Please make sure your database server is running at `localhost:4722`.
-2024-10-25T15:44:52.750Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientInitializationError: 
-Invalid `prisma.leetCodeLink.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:6:31
-
-  3 const prisma = new PrismaClient();
-  4 
-  5 export async function linkAccount(username: string, discordId: string) {
-→ 6     await prisma.leetCodeLink.create(
-Can't reach database server at `localhost:4722`
-
-Please make sure your database server is running at `localhost:4722`.
-2024-10-25T15:45:09.172Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientInitializationError: 
-Invalid `prisma.leetCodeLink.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:6:31
-
-  3 const prisma = new PrismaClient();
-  4 
-  5 export async function linkAccount(username: string, discordId: string) {
-→ 6     await prisma.leetCodeLink.create(
-Can't reach database server at `localhost:4722`
-
-Please make sure your database server is running at `localhost:4722`.
-2024-10-25T15:59:35.730Z [INFO]: Bot is now connected to Discord
-2024-10-25T15:59:35.852Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:00:01.815Z [ERROR]: 
-Invalid `prisma.historyProblem.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/historyProblem.ts:7:33
-
-  4 const prisma = new PrismaClient();
-  5 
-  6 export async function createProblem(data: LeetCodeProblemInterface) {
-→ 7     await prisma.historyProblem.create(
-Can't reach database server at `localhost:4722`
-
-Please make sure your database server is running at `localhost:4722`.
-2024-10-25T16:01:05.046Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:01:05.357Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:06:34.831Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:06:35.204Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:33:57.158Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientValidationError: 
-Invalid `prisma.leetCodeLink.create()` invocation in
-/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:6:31
-
-  3 const prisma = new PrismaClient();
-  4 
-  5 export async function linkAccount(username: string, discordId: string) {
-→ 6     await prisma.leetCodeLink.create({
-          data: {
-            idDiscord: "1150805906892804096",
-        +   leetCodeUsername: String
-          }
-        })
-
-Argument `leetCodeUsername` must not be null.
-2024-10-25T16:34:19.101Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:34:19.247Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:39:02.994Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:39:03.139Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:39:34.403Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:39:34.547Z [INFO]: Logged in as y2 dev boat#0873
-2024-10-25T16:49:14.199Z [INFO]: Bot is now connected to Discord
-2024-10-25T16:49:14.333Z [INFO]: Logged in as y2 dev boat#0873
