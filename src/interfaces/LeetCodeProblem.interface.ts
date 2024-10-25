@@ -4,4 +4,5 @@ export interface LeetCodeProblemInterface {
     titleSlug: string;
     url: string;
     rate: number;
+    difficulty: number;
 }

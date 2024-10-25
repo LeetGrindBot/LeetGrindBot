@@ -33,6 +33,7 @@ model HistoryProblem {
   code         Int
   url          String
   rate         Float
+  difficulty   Int
   createdDate  DateTime       @default(now())
   HistoryPoint HistoryPoint[]
 }

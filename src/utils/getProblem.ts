@@ -15,7 +15,8 @@ export default async function getRandomProblem(difficulty: number) : Promise<Lee
         title: title,
         titleSlug: titleSlug,
         url: url,
-        rate: rate
+        rate: rate,
+        difficulty: difficulty
     };
     return res;
 }
