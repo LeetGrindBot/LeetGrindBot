@@ -1,12 +1,5 @@
 import axios from "axios";
-
-interface LeetCodeProblem {
-    code: number;
-    title: string;
-    titleSlug: string;
-    url: string;
-    rate: number;
-}
+import {LeetCodeProblemInterface} from "../interfaces";
 
 const diffMap: { [key: string]: string } = {
     1: "EASY",
@@ -14,14 +7,14 @@ const diffMap: { [key: string]: string } = {
     3: "HARD"
 };
 
-export default async function getRandomProblem(difficulty: number) : Promise<LeetCodeProblem> {
+export default async function getRandomProblem(difficulty: number) : Promise<LeetCodeProblemInterface> {
     const diffStr = diffMap[difficulty];
     const [code, title, titleSlug, url, rate] = await bruteForce(diffStr);
-    const res : LeetCodeProblem = {
-        code: code, 
-        title: title, 
-        titleSlug: titleSlug, 
-        url: url, 
+    const res : LeetCodeProblemInterface = {
+        code: code,
+        title: title,
+        titleSlug: titleSlug,
+        url: url,
         rate: rate
     };
     return res;

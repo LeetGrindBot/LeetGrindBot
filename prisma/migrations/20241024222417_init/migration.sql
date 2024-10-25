@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "HistoryProblem" ALTER COLUMN "rate" SET DATA TYPE TEXT,
+ALTER COLUMN "code" SET DATA TYPE TEXT;

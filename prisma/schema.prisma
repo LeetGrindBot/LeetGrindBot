@@ -30,8 +30,9 @@ model HistoryPoint {
 model HistoryProblem {
   titleSlug    String         @id @unique
   title        String
-  code         String
+  code         Int
   url          String
+  rate         Float
   createdDate  DateTime       @default(now())
   HistoryPoint HistoryPoint[]
 }

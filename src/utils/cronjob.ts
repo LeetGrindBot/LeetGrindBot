@@ -4,6 +4,7 @@ import config from "../config/index";
 import createEmbeds from "../embeds/leetCodeEmbeds";
 import {getRandomDifficulty} from "./getRandom";
 import log from "../logger";
+import {LeetCodeProblemInterface} from "../interfaces";
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
@@ -28,7 +29,7 @@ export async function sendNewProblem(client : any) {
     }
 
     const difficulty: number = getRandomDifficulty();
-    const [code, text, url] = await getRandomProblem(difficulty);
+    const problem: LeetCodeProblemInterface = await getRandomProblem(difficulty);
 
     const guild = client.guilds.cache.get(guildId);
     if (!guild) {
@@ -40,5 +41,5 @@ export async function sendNewProblem(client : any) {
         log.error('Channel not found!');
         return;
     }
-    await channel.send({embeds: [createEmbeds(url, text, difficulty)]});
+    await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
 }
