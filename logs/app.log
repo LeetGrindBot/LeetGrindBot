@@ -15,3 +15,38 @@ Invalid `prisma.leetCodeLink.create()` invocation in
   5 export async function linkAccount(username: string, discordId: string) {
 → 6     await prisma.leetCodeLink.create(
 Unique constraint failed on the fields: (`idDiscord`)
+2024-10-25T09:04:04.819Z [INFO]: Bot is now connected to Discord
+2024-10-25T09:04:04.966Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-25T09:16:56.178Z [INFO]: Bot is now connected to Discord
+2024-10-25T09:16:56.297Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-25T09:18:40.228Z [INFO]: Bot is now connected to Discord
+2024-10-25T09:18:40.345Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-25T09:18:45.900Z [ERROR]: [ERROR] Error in your exampleCmd.js run function: PrismaClientValidationError: 
+Invalid `prisma.historyProblem.create()` invocation in
+/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/historyProblem.ts:7:33
+
+  4 const prisma = new PrismaClient();
+  5 
+  6 export async function createProblem(data: LeetCodeProblemInterface) {
+→ 7     await prisma.historyProblem.create({
+          data: {
+            code: "2894",
+                  ~~~~~~
+            title: "Maximum Elegance of a K-Length Subsequence",
+            titleSlug: "maximum-elegance-of-a-k-length-subsequence",
+            url: "https://leetcode.com/problems/maximum-elegance-of-a-k-length-subsequence/description/",
+            rate: 33.22265531013907
+          }
+        })
+
+Argument `code`: Invalid value provided. Expected Int, provided String.
+2024-10-25T09:20:54.851Z [INFO]: Bot is now connected to Discord
+2024-10-25T09:20:54.981Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-25T09:20:55.314Z [ERROR]: [ERROR] Error in your registerCommands.js file: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/database/historyProblem.ts[0m:[93m9[0m:[93m28[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number' is not assignable to parameter of type 'string'.
+
+[7m9[0m             code: parseInt(data.code),
+[7m [0m [91m                           ~~~~~~~~~[0m
+
+2024-10-25T09:27:46.284Z [INFO]: Bot is now connected to Discord
+2024-10-25T09:27:46.433Z [INFO]: Logged in as y2 dev boat#0873

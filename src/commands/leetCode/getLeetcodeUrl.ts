@@ -4,6 +4,7 @@ import {getRandomDifficulty} from "../../utils/getRandom";
 import createEmbeds from "../../embeds/leetCodeEmbeds"
 import log from "../../logger";
 import {LeetCodeProblemInterface} from "../../interfaces";
+import {createProblem} from "../../database/historyProblem";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -46,6 +47,8 @@ module.exports = {
                 log.error('Channel not found!');
                 return;
             }
+
+            await createProblem(problem).catch(err => log.error(err));
 
             await channel.send({embeds: [createEmbeds(problem.url, problem.title, choose)]});
 

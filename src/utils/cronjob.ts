@@ -5,6 +5,7 @@ import createEmbeds from "../embeds/leetCodeEmbeds";
 import {getRandomDifficulty} from "./getRandom";
 import log from "../logger";
 import {LeetCodeProblemInterface} from "../interfaces";
+import {createProblem} from "../database/historyProblem";
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
@@ -41,5 +42,7 @@ export async function sendNewProblem(client : any) {
         log.error('Channel not found!');
         return;
     }
+    await createProblem(problem).catch(err => log.error(err));
+
     await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
 }

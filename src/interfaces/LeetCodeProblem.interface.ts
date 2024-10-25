@@ -3,5 +3,5 @@ export interface LeetCodeProblemInterface {
     title: string;
     titleSlug: string;
     url: string;
-    rate: string;
+    rate: number;
 }
