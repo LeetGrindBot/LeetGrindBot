@@ -19,6 +19,7 @@ module.exports = {
     deleted: false,
     userPermissions: [],
     botPermissions: [],
+    rolePermissions: ["admin", "moderator"],
 
     run: async (client: any, interaction: any) => {
         try {

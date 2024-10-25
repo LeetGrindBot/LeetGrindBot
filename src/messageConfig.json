@@ -12,5 +12,6 @@
   "unableToInteractWithYourself": "`❌` You cannot do that to yourself.",
   "cannotUseButton": "`❌` You cannot use this button.",
   "cannotUseSelect": "`❌` You cannot use this select menu.",
-  "footerText": "Example Text"
+  "footerText": "Example Text",
+  "roleNoPermissions": "`❌` You do not have enough permissions."
 }

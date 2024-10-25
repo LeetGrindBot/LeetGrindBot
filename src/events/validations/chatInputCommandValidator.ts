@@ -45,6 +45,22 @@ module.exports = async (client: any, interaction: any) => {
             }
         }
 
+        if (commandObject.rolePermissions?.length) {
+            // On vérifie si l'utilisateur a au moins un des rôles nécessaires
+            const hasPermission = commandObject.rolePermissions.some((role: string) =>
+                member.roles.cache.some((r: any) => r.name === role)
+            );
+
+            if (!hasPermission) {
+                const rEmbed = new EmbedBuilder()
+                    // @ts-ignore
+                    .setColor(`${mConfig.embedColorError}`)
+                    .setDescription(`${mConfig.roleNoPermissions}`);
+
+                return interaction.reply({ embeds: [rEmbed], ephemeral: true });
+            }
+        }
+
         if (commandObject.botPermissions?.length) {
             for (const permission of commandObject.botPermissions) {
                 const bot = guild.members.me;
