@@ -23,7 +23,7 @@ model HistoryPoint {
   Points           Int
   createdDate      DateTime       @default(now())
   LeetCodeLink     LeetCodeLink   @relation(fields: [idDiscord], references: [idDiscord], onDelete: Cascade, onUpdate: Cascade)
-  HistoryProblem   HistoryProblem @relation(fields: [titleSlug], references: [titleSlug], onDelete: Cascade, onUpdate: Cascade)
+  HistoryProblem   HistoryProblem @relation(fields: [idHistoryProblem], references: [titleSlug], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model HistoryProblem {
