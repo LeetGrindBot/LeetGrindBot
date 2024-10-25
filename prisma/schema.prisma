@@ -20,7 +20,6 @@ model LeetCodeLink {
 model HistoryPoint {
   idDiscord        String         @id @unique
   idHistoryProblem String
-  titleSlug        String
   Points           Int
   createdDate      DateTime       @default(now())
   LeetCodeLink     LeetCodeLink   @relation(fields: [idDiscord], references: [idDiscord], onDelete: Cascade, onUpdate: Cascade)
