@@ -50,3 +50,110 @@ Argument `code`: Invalid value provided. Expected Int, provided String.
 
 2024-10-25T09:27:46.284Z [INFO]: Bot is now connected to Discord
 2024-10-25T09:27:46.433Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-25T15:44:18.312Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T15:44:19.011Z [INFO]: Bot is now connected to Discord
+2024-10-25T15:44:19.605Z [INFO]: Application command linkaccount has been registered.
+2024-10-25T15:44:19.944Z [INFO]: Application command verify has been registered.
+2024-10-25T16:36:21.760Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:36:21.938Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:41:13.229Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:41:13.407Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:41:14.126Z [ERROR]: [ERROR] Error in your registerCommands.js file: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/database/verifyProblem.ts[0m:[93m34[0m:[93m13[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'titleSlug' does not exist in type 'Without<HistoryPointCreateInput, HistoryPointUncheckedCreateInput> & HistoryPointUncheckedCreateInput'.
+
+[7m34[0m             titleSlug: titleSlug,
+[7m  [0m [91m            ~~~~~~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m2826[0m:[93m5[0m
+    [7m2826[0m     data: XOR<HistoryPointCreateInput, HistoryPointUncheckedCreateInput>
+    [7m    [0m [96m    ~~~~[0m
+    The expected type comes from property 'data' which is declared here on type '{ select?: HistoryPointSelect<DefaultArgs> | null | undefined; include?: HistoryPointInclude<DefaultArgs> | null | undefined; data: (Without<...> & HistoryPointUncheckedCreateInput) | (Without<...> & HistoryPointCreateInput); }'
+
+2024-10-25T16:41:36.526Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:41:36.704Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:47:25.082Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:47:25.257Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:51:17.936Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:51:18.132Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:52:56.826Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientValidationError: 
+Invalid `prisma.historyProblem.findUnique()` invocation in
+C:\Users\cedri\Desktop\LeetGrindBot\src\database\historyProblem.ts:21:45
+
+  18 }
+  19 
+  20 export async function getDifficulty(titleSlug: string) : Promise<number> {
+→ 21     const res = await prisma.historyProblem.findUnique({
+           where: {
+             titleSlug: undefined,
+         ?   AND?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   OR?: HistoryProblemWhereInput[],
+         ?   NOT?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   title?: StringFilter | String,
+         ?   code?: IntFilter | Int,
+         ?   url?: StringFilter | String,
+         ?   rate?: FloatFilter | Float,
+         ?   difficulty?: IntFilter | Int,
+         ?   createdDate?: DateTimeFilter | DateTime,
+         ?   HistoryPoint?: HistoryPointListRelationFilter
+           }
+         })
+
+Argument `where` of type HistoryProblemWhereUniqueInput needs at least one of `titleSlug` or `titleSlug` arguments. Available options are marked with ?.
+2024-10-25T16:54:38.119Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:54:38.297Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:54:42.931Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientValidationError: 
+Invalid `prisma.historyProblem.findUnique()` invocation in
+C:\Users\cedri\Desktop\LeetGrindBot\src\database\historyProblem.ts:21:45
+
+  18 }
+  19 
+  20 export async function getDifficulty(titleSlug: string) : Promise<number> {
+→ 21     const res = await prisma.historyProblem.findUnique({
+           where: {
+             titleSlug: undefined,
+         ?   AND?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   OR?: HistoryProblemWhereInput[],
+         ?   NOT?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   title?: StringFilter | String,
+         ?   code?: IntFilter | Int,
+         ?   url?: StringFilter | String,
+         ?   rate?: FloatFilter | Float,
+         ?   difficulty?: IntFilter | Int,
+         ?   createdDate?: DateTimeFilter | DateTime,
+         ?   HistoryPoint?: HistoryPointListRelationFilter
+           }
+         })
+
+Argument `where` of type HistoryProblemWhereUniqueInput needs at least one of `titleSlug` or `titleSlug` arguments. Available options are marked with ?.
+2024-10-25T16:55:00.370Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:55:00.555Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:55:04.902Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientValidationError: 
+Invalid `prisma.historyProblem.findUnique()` invocation in
+C:\Users\cedri\Desktop\LeetGrindBot\src\database\historyProblem.ts:21:45
+
+  18 }
+  19 
+  20 export async function getDifficulty(titleSlug: string) : Promise<number> {
+→ 21     const res = await prisma.historyProblem.findUnique({
+           where: {
+             titleSlug: undefined,
+         ?   AND?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   OR?: HistoryProblemWhereInput[],
+         ?   NOT?: HistoryProblemWhereInput | HistoryProblemWhereInput[],
+         ?   title?: StringFilter | String,
+         ?   code?: IntFilter | Int,
+         ?   url?: StringFilter | String,
+         ?   rate?: FloatFilter | Float,
+         ?   difficulty?: IntFilter | Int,
+         ?   createdDate?: DateTimeFilter | DateTime,
+         ?   HistoryPoint?: HistoryPointListRelationFilter
+           }
+         })
+
+Argument `where` of type HistoryProblemWhereUniqueInput needs at least one of `titleSlug` or `titleSlug` arguments. Available options are marked with ?.
+2024-10-25T16:55:23.218Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:55:23.392Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:56:10.560Z [INFO]: Bot is now connected to Discord
+2024-10-25T16:56:10.753Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:56:58.990Z [INFO]: Logged in as Leetbot#1587
+2024-10-25T16:56:59.718Z [INFO]: Bot is now connected to Discord
