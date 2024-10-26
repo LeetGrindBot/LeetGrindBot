@@ -7,29 +7,30 @@ export default function createEmbeds(url: any, titre: any, difficulty: any) {
   const difficulties = ["Easy 🟢", "Medium 🟠", "Hard 🔴"];
 
   return new EmbedBuilder()
-    .setColor("#6833ff")
     .setTitle("🎁 Nouveau challenge LeetCode disponible !")
     .addFields(
       { name: "\u200B", value: "\u200B" },
-      { name: "✨ Titre du challenge :", value: validTitle },
+      { name: `✨ Titre du challenge : _${validTitle}_`, value: "\u200B" },
       {
-        name: "📈 Difficulté :",
-        value: difficulties[difficulty - 1],
+        name: `📈 Difficulté : ${difficulties[difficulty - 1]}`,
+        value: "\u200B",
       },
       {
-        name: "🔗 Lien :",
-        value: `[Clique ici pour relever le défi !](${validUrl})`,
+        name: `🔗 Lien : ${validUrl}`,
+        value: "\u200B",
       },
-      { name: "\u200B", value: "\u200B" }
+      {
+        name: "Bon GRIND à tous. Chaque ligne de code vous rapproche du sommet 🙌",
+        value: "\u200B",
+      }
     )
-    .setDescription(
-      "Bon GRIND à tous. Chaque ligne de code vous rapproche du sommet 🙌"
-    )
+
     .setImage(getRandomGif())
-    .setTimestamp()
+    .setColor("#6833ff")
     .setFooter({
       text: "y2Corp",
       iconURL:
         "https://i1.sndcdn.com/avatars-esGfMkGUS2E11gHw-yha4Fw-t240x240.jpg",
-    });
+    })
+    .setTimestamp();
 }
