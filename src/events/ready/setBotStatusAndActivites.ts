@@ -1,11 +1,13 @@
-import {ActivityType} from 'discord.js';
+import { ActivityType } from "discord.js";
 
 module.exports = async (client: any) => {
-    client.user.setPresence({
-        activities: [{
-            name: 'with leetCode',
-            type: ActivityType.Playing,
-        }],
-        status: 'online'
-    });
-}
+  client.user.setPresence({
+    activities: [
+      {
+        name: "LeetCode",
+        type: ActivityType.Playing,
+      },
+    ],
+    status: "online",
+  });
+};
