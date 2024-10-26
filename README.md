@@ -9,7 +9,7 @@ LeetGrindBot is an exclusive Discord bot for the **y2's Empire** server, designe
 - **Weekly Leaderboard**: The bot displays a leaderboard every week, highlighting the top three solvers.
 - **Exclusive Access**: Currently limited to the "y2's Empire" Discord server.
 
-## 🛠️ Technologies Used
+## 🔪 Technologies Used
 
 ### Backend
 - **TypeScript**: Ensures a reliable and maintainable codebase.
@@ -47,22 +47,19 @@ npm (Node Package Manager)
    ```bash
    npm install
 
-4. Set up environment variables:
 
-Create a .env file in the root directory and add your configurations:
-
-  ```bash
-  DISCORD_TOKEN="your-discord-bot-token"
-  MODE="dev"
-  GUILD_ID="your-guild-id"
-  CHANNEL_ID="your-channel-id"
-  
-  DB_DATABASE=""
-  DB_USERNAME=""
-  DB_PASSWORD=""
-  DB_PORT=""
-  DATABASE_URL=""
-  ```
+4. Set up environment variables. Create a .env file in the root directory and add your configurations:
+   ```bash
+     DISCORD_TOKEN="your-discord-bot-token"
+     MODE="dev"
+     GUILD_ID="your-guild-id"
+     CHANNEL_ID="your-channel-id"
+     
+     DB_DATABASE=""
+     DB_USERNAME=""
+     DB_PASSWORD=""
+     DB_PORT=""
+     DATABASE_URL=""
 
 4. Run the bot with Docker (optional):
    
@@ -70,13 +67,11 @@ Create a .env file in the root directory and add your configurations:
    docker-compose up
    
 5. Start the bot in development mode:
-   
-  ```bash
-  npm run start
-```
 
+   ```bash
+   npm run start
 
-## 🎉 Contributing
+## 🎉  Contributing
 
 ![contributors](https://contrib.rocks/image?repo=LeetGrindBot/LeetGrindBot-V1)
 
