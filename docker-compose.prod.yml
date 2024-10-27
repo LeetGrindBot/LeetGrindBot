@@ -7,25 +7,9 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: unless-stopped
+    network_mode: "host"
     environment:
       DATABASE_URL: ${DATABASE_URL}
       DISCORD_TOKEN: ${DISCORD_TOKEN}
       GUILD_ID: ${GUILD_ID}
       CHANNEL_ID: ${CHANNEL_ID}
-    depends_on:
-      - psql
-    network_mode: "host"
-  psql:
-    image: postgres:latest
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "${DB_PORT}:5432"
-    volumes:
-      - psql_volume:/var/lib/postgresql/data
-
-volumes:
-  psql_volume: 
