@@ -3,6 +3,9 @@ version: '3.8'
 services:
   bot:
     image: leetgrindbot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     environment:
       DISCORD_TOKEN: ${DISCORD_TOKEN}
