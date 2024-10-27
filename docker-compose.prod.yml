@@ -1,19 +1,20 @@
 version: '3.8'
 
 services:
-  #bot:
-  #  image: leetgrindbot
-  #  build:
-  #    context: .
-  #    dockerfile: ./Dockerfile
-  #  restart: unless-stopped
-  #  environment:
-  #    DATABASE_URL: ${DATABASE_URL}
-  #    DISCORD_TOKEN: ${DISCORD_TOKEN}
-  #    GUILD_ID: ${GUILD_ID}
-  #    CHANNEL_ID: ${CHANNEL_ID}
-  #  depends_on:
-  #    - psql
+  bot:
+    image: leetgrindbot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      GUILD_ID: ${GUILD_ID}
+      CHANNEL_ID: ${CHANNEL_ID}
+    depends_on:
+      - psql
+    network_mode: "host"
   psql:
     image: postgres:latest
     restart: unless-stopped
