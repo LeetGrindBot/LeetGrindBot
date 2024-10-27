@@ -6,7 +6,7 @@ import config from "./config/index";
 import log from "./logger";
 import {CronJob} from "cron";
 
-const client : Client<any> = new Client({
+const client : Client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,

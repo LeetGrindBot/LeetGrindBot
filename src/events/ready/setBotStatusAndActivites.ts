@@ -5,6 +5,7 @@ module.exports = async (client: any) => {
         activities: [{
             name: 'with leetCode',
             type: ActivityType.Playing,
+            name_localizations: {"fr": "Bonjour, monde !", "de": "Hallo, Welt !", "en": "Hello, World !"}
         }],
         status: 'online'
     });
