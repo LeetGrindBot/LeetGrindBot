@@ -9,7 +9,7 @@ import {createProblem} from "../../database/historyProblem";
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("getleetcodeurl")
-        .setDescription("Test if everything works.3")
+        .setDescription("Génère un nouveau problème leetcode.")
         .addStringOption(option =>
             option.setName('difficulty')
                 .setDescription('choose difficulty (empty = random) between easy, medium, hard'))
