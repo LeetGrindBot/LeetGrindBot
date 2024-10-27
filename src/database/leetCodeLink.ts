@@ -11,6 +11,17 @@ export async function linkAccount(username: string, discordId: string) {
     });
 }
 
+export async function updateAccount(username: string, discordId: string) {
+    await prisma.leetCodeLink.update({
+        where: {
+            idDiscord: discordId
+        },
+        data: {
+            leetCodeUsername: username
+        }
+    });
+}
+
 export async function verifyLink(discordId: string): Promise<any> {
         const data = prisma.leetCodeLink.findUnique({
             where: {

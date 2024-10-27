@@ -19,7 +19,7 @@ module.exports = {
     deleted: false,
     userPermissions: [],
     botPermissions: [],
-    rolePermissions: ["admin", "moderator"],
+    rolePermissions: ["FSOCIETY", "LeetGrinder"],
 
     run: async (client: any, interaction: any) => {
         try {
