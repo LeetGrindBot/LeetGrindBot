@@ -3,3 +3,4 @@
 .env
 
 ./prisma/migrations
+.package-lock.json

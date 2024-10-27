@@ -211,3 +211,32 @@ Invalid `prisma.leetCodeLink.create()` invocation in
 Unique constraint failed on the fields: (`idDiscord`)
 2024-10-27T10:03:14.170Z [ERROR]: [ERROR - COMMAND - verifiy] : Error [InteractionAlreadyReplied]: The reply to this interaction has already been sent or deferred.
 2024-10-27T10:27:42.289Z [ERROR]: [ERROR - COMMAND - verifiy] : Error [InteractionAlreadyReplied]: The reply to this interaction has already been sent or deferred.
+2024-10-27T14:52:03.159Z [INFO]: Bot is now connected to Discord
+2024-10-27T14:52:03.279Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-27T15:07:18.275Z [INFO]: Bot is now connected to Discord
+2024-10-27T15:07:18.401Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-27T15:07:19.614Z [INFO]: Application command linkaccount has been edited.
+2024-10-27T15:07:34.639Z [INFO]: Bot is now connected to Discord
+2024-10-27T15:07:34.799Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-27T15:07:36.190Z [INFO]: Application command linkaccount has been edited.
+2024-10-27T15:07:36.603Z [INFO]: Application command updateaccount has been registered.
+2024-10-27T15:11:16.448Z [INFO]: Logged in as y2 dev boat#0873
+2024-10-27T15:11:16.953Z [INFO]: Bot is now connected to Discord
+2024-10-27T15:12:01.360Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientKnownRequestError: 
+Invalid `prisma.leetCodeLink.update()` invocation in
+/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:15:31
+
+  12 }
+  13 
+  14 export async function updateAccount(username: string, discordId: string) {
+→ 15     await prisma.leetCodeLink.update(
+An operation failed because it depends on one or more records that were required but not found. Record to update not found.
+2024-10-27T15:12:58.423Z [ERROR]: [ERROR - COMMAND - linkAccount] : PrismaClientKnownRequestError: 
+Invalid `prisma.leetCodeLink.update()` invocation in
+/Users/alexscdt/Documents/Project/LeetGrindbot/src/database/leetCodeLink.ts:15:31
+
+  12 }
+  13 
+  14 export async function updateAccount(username: string, discordId: string) {
+→ 15     await prisma.leetCodeLink.update(
+An operation failed because it depends on one or more records that were required but not found. Record to update not found.
