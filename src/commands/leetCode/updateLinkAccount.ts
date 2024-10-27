@@ -20,7 +20,7 @@ module.exports = {
     deleted: false,
     userPermissions: [],
     botPermissions: [],
-    rolePermissions: ["FSOCIETY", "LeetGrinder"],
+    rolePermissions: ["FSOCIETY", "LeetGrinder", "Protecteur de Gotham"],
 
     run: async (client: any, interaction: any) => {
         const username = interaction.options.getString('username');
