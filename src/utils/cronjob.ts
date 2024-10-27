@@ -9,7 +9,7 @@ import {createProblem} from "../database/historyProblem";
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
-        '20 22 * * *',
+        '0 18 * * *',
         () => sendNewProblem(client),
         null,
         false,
