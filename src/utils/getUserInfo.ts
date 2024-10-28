@@ -4,7 +4,7 @@ export default async function hasUserCompleted(username: string, problemslug: st
 {
     let q: string = `query getAcSubmissions($username: String!, $limit: Int) {
         recentAcSubmissionList(username: $username, limit: $limit) {
-            titleSlug, timestamp
+            titleSlug, timestamp, lang
         }
     }`;
     const variables: any = {
@@ -14,9 +14,14 @@ export default async function hasUserCompleted(username: string, problemslug: st
     const res = await axios.post("https://leetcode.com/graphql/", 
             {"query": q, "variables": variables, "operationName": "getAcSubmissions" });
     const subs: any[] = res["data"]["data"]["recentAcSubmissionList"];
-    const completed = subs.some((sub) => {
+    let completed = false;
+    let lang;
+    subs.forEach((sub) => {
         const slug = sub["titleSlug"];
-        return slug === problemslug
+        if (slug === problemslug) {
+            completed = true;
+            lang = sub["lang"];
+        }
     });
-    return completed;
+    return { completed: completed, lang: lang };
 }
