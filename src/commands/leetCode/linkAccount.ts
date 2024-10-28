@@ -28,7 +28,6 @@ module.exports = {
                 log.error("[ERROR - COMMAND - linkAccount] : " + err);
                 interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Merci de réessayer plus tard.', {ephemeral: true});
             });
-
         } catch (err) {
             log.error("[ERROR - COMMAND - linkAccount] : " + err);
         }

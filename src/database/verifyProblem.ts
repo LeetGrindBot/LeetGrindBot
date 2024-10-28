@@ -29,3 +29,11 @@ export async function addPoints(discordId: string, titleSlug: string, points: nu
 
     return data;
 }
+
+export async function getPoints(discordId: string): Promise<any> {
+    return prisma.historyPoint.findMany({
+        where: {
+            idDiscord: discordId
+        }
+    });
+}
