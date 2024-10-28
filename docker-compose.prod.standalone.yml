@@ -1,0 +1,13 @@
+services:
+  bot:
+    image: leetgrindbot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@127.0.0.1:${DB_PORT}/${DB_DATABASE}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      GUILD_ID: ${GUILD_ID}
+      CHANNEL_ID: ${CHANNEL_ID}

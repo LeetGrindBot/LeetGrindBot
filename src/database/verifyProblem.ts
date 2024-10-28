@@ -14,8 +14,8 @@ export async function verify( username: string): Promise<any> {
         throw "DB empty";
     }
     const lastProblemSlug = lastProblem.titleSlug;
-    const completed = await hasUserCompleted(username, lastProblemSlug);
-    return { completed: completed, titleSlug: lastProblemSlug };
+    const completionData = await hasUserCompleted(username, lastProblemSlug);
+    return { completed: completionData.completed, titleSlug: lastProblemSlug, lang: completionData.lang };
 }
 
 export async function addPoints(discordId: string, titleSlug: string, points: number): Promise<any> {
