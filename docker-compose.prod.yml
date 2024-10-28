@@ -8,13 +8,12 @@ services:
       dockerfile: ./Dockerfile
     restart: unless-stopped
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@leetgrindbot-v1-psql-1:5432/${DB_DATABASE}
       DISCORD_TOKEN: ${DISCORD_TOKEN}
       GUILD_ID: ${GUILD_ID}
       CHANNEL_ID: ${CHANNEL_ID}
     depends_on:
       - psql
-    network_mode: "host"
   psql:
     image: postgres:latest
     restart: unless-stopped
