@@ -29,7 +29,7 @@ module.exports = {
                     interaction.reply('Vous avez déjà lié votre compte.'); 
                 } else {
                     log.error("[ERROR - COMMAND - linkAccount] : " + err);
-                    interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Merci de réessayer plus tard.', {ephemeral: true});
+                    interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Vérifiez avoir bien entré votre LeetcodeId.', {ephemeral: true});
                 }
             });
         } catch (err) {
