@@ -1,5 +1,4 @@
 import {PrismaClient} from '@prisma/client';
-import {LeetCodeProblemInterface} from "../interfaces";
 import log from "../logger";
 import { getStartDate, getEndDate } from '../utils/dateUtils';
 
@@ -8,7 +7,7 @@ const prisma = new PrismaClient();
 export async function getLeaderboard(date: Date, limit: number) {
     const startDate = getStartDate(date);
     const endDate = getEndDate(date);
-    const res = await prisma.historyPoint.groupBy({
+    const scores = await prisma.historyPoint.groupBy({
         by: 'idDiscord',
         where: {
             createdDate: {
@@ -19,6 +18,31 @@ export async function getLeaderboard(date: Date, limit: number) {
         _sum: {
             Points: true,
         },
+        orderBy: {
+            _sum: {
+                Points: 'desc',
+            }
+        },
+        take: limit
+    });
+    const userIds = scores.map((val) => {
+        return val.idDiscord;
+    });
+    const usernames = await prisma.leetCodeLink.findMany({
+        select: {
+            idDiscord: true,
+            leetCodeUsername: true
+        },
+        where: {
+            idDiscord: {
+                in: userIds
+            }
+        }
+    });
+    const res = scores.map((val) => {
+        const points = val._sum.Points;
+        const username = usernames.find((el) => el.idDiscord === val.idDiscord)?.leetCodeUsername;
+        return { username: username, points: points}; 
     });
     if (!res) {
         log.error("[ERROR - DATABASE - getLeaderboard]");
@@ -27,5 +51,3 @@ export async function getLeaderboard(date: Date, limit: number) {
     return res;
 
 }
-
-getLeaderboard(new Date(), 10);
