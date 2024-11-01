@@ -25,8 +25,12 @@ module.exports = {
             await linkAccount(username, discordId).then(() => {
                 interaction.reply({content: 'Votre compte leetCode a bien été lié !', ephemeral: true});
             }).catch((err) => {
-                log.error("[ERROR - COMMAND - linkAccount] : " + err);
-                interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Merci de réessayer plus tard.', {ephemeral: true});
+                if(err.code == 'P2002') {
+                    interaction.reply('Vous avez déjà lié votre compte.'); 
+                } else {
+                    log.error("[ERROR - COMMAND - linkAccount] : " + err);
+                    interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Vérifiez avoir bien entré votre LeetcodeId.', {ephemeral: true});
+                }
             });
         } catch (err) {
             log.error("[ERROR - COMMAND - linkAccount] : " + err);
