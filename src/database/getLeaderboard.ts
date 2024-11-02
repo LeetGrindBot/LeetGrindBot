@@ -1,14 +1,15 @@
 import {PrismaClient} from '@prisma/client';
 import log from "../logger";
-import { getStartDate, getEndDate } from '../utils/dateUtils';
+import {getEndDate, getStartDate} from '../utils/dateUtils';
+import {GetLeadersBoardsInterface} from "../interfaces/getLeadersBoards.interface";
 
 const prisma = new PrismaClient();
 
-export async function getLeaderboard(date: Date, limit: number) {
+export async function getLeaderboard(date: Date, limit: number): Promise<GetLeadersBoardsInterface[]> {
     const startDate = getStartDate(date);
     const endDate = getEndDate(date);
     const scores = await prisma.historyPoint.groupBy({
-        by: 'idDiscord',
+        by: ['idDiscord'],
         where: {
             createdDate: {
                 gte: startDate,
@@ -25,9 +26,7 @@ export async function getLeaderboard(date: Date, limit: number) {
         },
         take: limit
     });
-    const userIds = scores.map((val) => {
-        return val.idDiscord;
-    });
+    const userIds = scores.map((val) => val.idDiscord);
     const usernames = await prisma.leetCodeLink.findMany({
         select: {
             idDiscord: true,
@@ -41,13 +40,13 @@ export async function getLeaderboard(date: Date, limit: number) {
     });
     const res = scores.map((val) => {
         const points = val._sum.Points;
+        const discordId = val.idDiscord;
         const username = usernames.find((el) => el.idDiscord === val.idDiscord)?.leetCodeUsername;
-        return { username: username, points: points}; 
+        return { username: username, points: points, discordId: discordId };
     });
     if (!res) {
         log.error("[ERROR - DATABASE - getLeaderboard]");
         throw "error";
     }
     return res;
-
 }

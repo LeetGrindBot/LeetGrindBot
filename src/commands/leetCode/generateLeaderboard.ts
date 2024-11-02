@@ -1,7 +1,8 @@
-import {SlashCommandBuilder, TextChannel} from "discord.js";
-import { getLeaderboard } from "../../database/getLeaderboard";
-import createEmbeds from "../../embeds/leetCodeEmbeds"
+import {Client, SlashCommandBuilder, TextChannel} from "discord.js";
+import {getLeaderboard} from "../../database/getLeaderboard";
 import log from "../../logger";
+import generateLeaderBoardImg from "../../utils/generateLeaderBoardImg";
+import GenerateLeaderBoardEmbed from "../../embeds/leaderBoardEmbeds";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,16 +16,24 @@ module.exports = {
     botPermissions: [],
     rolePermissions: ["FSOCIETY", "LeetGrinder", "Protecteur de Gotham"],
 
-    run: async (client: any, interaction: any) => {
+    run: async (client: Client, interaction: any) => {
         try {
             const date = new Date();
-            const leaderboard = await getLeaderboard(date, 5);
-            await interaction.reply({content: `
-                Leaderboard de la semaine :
-                1. ${leaderboard[0].username} avec ${leaderboard[0].points} points !
-                2. ${leaderboard[1].username} avec ${leaderboard[1].points} points !
-                3. ${leaderboard[2].username} avec ${leaderboard[2].points} points !
-            `});
+            const leaderboard = await getLeaderboard(date, 13);
+            const attachment = await generateLeaderBoardImg(leaderboard, client);
+            const embeds = await GenerateLeaderBoardEmbed(leaderboard, client);
+
+            const guild = client.guilds.cache.get(interaction.guildId);
+            // @ts-ignore
+            const channel: TextChannel = guild?.channels.cache.get(interaction.channelId);
+
+            if (!channel) {
+                log.error('Channel not found!');
+                return;
+            }
+
+            await channel.send({ files: [attachment]});
+            await channel.send({ embeds: [embeds] });
         } catch (err) {
             log.error("[ERROR] Error in your exampleCmd.js run function: " + err);
         }
