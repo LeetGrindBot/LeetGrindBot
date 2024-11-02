@@ -7,12 +7,12 @@ const GenerateLeaderBoardImg = async (data: GetLeadersBoardsInterface[], client:
     const canvas = Canvas.createCanvas(700, 300);
     const context = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./src/assets/img/batmanLego.jpeg');
+    const background = await Canvas.loadImage('./src/assets/img/leaderboardBackground.jpeg');
 
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     const positions = [
-        { x: 50, y: 50, rank: '1er', borderColor: '#FFD700' },
-        { x: 250, y: 50, rank: '2ème', borderColor: '#C0C0C0' },
+        { x: 250, y: 50, rank: '1er', borderColor: '#FFD700' },
+        { x: 50, y: 50, rank: '2ème', borderColor: '#C0C0C0' },
         { x: 450, y: 50, rank: '3ème', borderColor: '#CD7F32' }
     ];
 
