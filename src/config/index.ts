@@ -13,5 +13,5 @@ export default {
     mode: process.env.MODE,
     discordToken: process.env.DISCORD_TOKEN,
     guildId: process.env.GUILD_ID,
-    channelId: process.env.CHANNEL_ID
+    channelId: process.env.CHANNEL_ID,
 };
