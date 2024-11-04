@@ -10,7 +10,7 @@ import { cleanChannel } from './channelCleaner';
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
-        '0 18 * * *',
+        '0 18 * * 1-5',
         () => sendNewProblem(client),
         null,
         false,
