@@ -44,7 +44,9 @@ export async function sendNewProblem(client : any) {
         return;
     }
     await cleanChannel(channel);
-    await createProblem(problem).catch(err => log.error(err));
+    await createProblem(problem)
+    .then(() => log.info("[LOG | CREATE PROBLEM] : " + problem.title))
+    .catch(err => log.error(err));
 
     await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
 }
