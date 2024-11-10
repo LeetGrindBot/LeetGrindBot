@@ -4,7 +4,7 @@ import log from "../../logger";
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("updateaccount")
+        .setName("adminupdateaccount")
         .setDescription("lier son compte entre le bot et le site leetCode")
         .addStringOption(option =>
             option.setName('username')
