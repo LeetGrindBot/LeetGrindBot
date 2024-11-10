@@ -1,11 +1,11 @@
 import {SlashCommandBuilder} from "discord.js";
 import log from "../../logger";
-import {linkAccount} from "../../database/leetCodeLink";
+import {updateAccount} from "../../database/leetCodeLink";
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("linkaccount")
-        .setDescription("lier son compte entre le bot et le site leetCode")
+        .setName("updateaccount")
+        .setDescription("modifier son pseudo leetCode")
         .addStringOption(option =>
             option.setName('username')
                 .setRequired(true)
@@ -22,14 +22,14 @@ module.exports = {
             const username = interaction.options.getString('username');
             const discordId = interaction.user.id;
 
-            await linkAccount(username, discordId).then(() => {
+            await updateAccount(username, discordId).then(() => {
                 interaction.reply({content: 'Votre compte leetCode a bien été lié !', ephemeral: true});
             }).catch((err) => {
                 if(err.code == 'P2002') {
-                    interaction.reply('Vous avez déjà lié votre compte. Si vous souhaitez le modifier, veuillez utiliser la commande updateAccount');
+                    interaction.reply('Le pseudo leetCode que vous avez entré est déjà lié à un autre compte. Veuillez réessayer avec un autre pseudo ou contacter un LeetGrinder .', {ephemeral: true});
                 } else {
                     log.error("[ERROR - COMMAND - linkAccount] : " + err);
-                    interaction.reply('Une erreur est survenue lors de la liaison de votre compte leetCode. Vérifiez avoir bien entré votre LeetcodeId.', {ephemeral: true});
+                    interaction.reply('Une erreur est survenue lors de la modification de votre compte leetCode. Vérifiez avoir bien entré votre LeetcodeId ou contacter un LeetGrinder', {ephemeral: true});
                 }
             });
         } catch (err) {

@@ -10,7 +10,7 @@ import { cleanChannel } from './channelCleaner';
 
 export default function createJob(client : any) : CronJob {
     return new CronJob(
-        '0 18 * * *',
+        '0 18 * * 1-5',
         () => sendNewProblem(client),
         null,
         false,
@@ -44,7 +44,9 @@ export async function sendNewProblem(client : any) {
         return;
     }
     await cleanChannel(channel);
-    await createProblem(problem).catch(err => log.error(err));
+    await createProblem(problem)
+    .then(() => log.info("[LOG | CREATE PROBLEM] : " + problem.title))
+    .catch(err => log.error(err));
 
     await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
 }

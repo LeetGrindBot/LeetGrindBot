@@ -18,6 +18,7 @@ module.exports = {
 
     run: async (client: Client, interaction: any) => {
         try {
+            interaction.reply({ content: "Génération du leaderboard en cours...", ephemeral: true });
             const date = new Date();
             const leaderboard = await getLeaderboard(date, 13);
             const attachment = await generateLeaderBoardImg(leaderboard, client);
