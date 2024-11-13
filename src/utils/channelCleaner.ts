@@ -8,7 +8,7 @@ export async function cleanChannel(channel: TextChannel) {
             const manager = channel.messages;
             fetched = await manager.channel.messages.fetch({limit: 100});
             if(fetched.size > 0) {
-                channel.bulkDelete(fetched, true); 
+                await channel.bulkDelete(fetched, true); 
             }
         } while(fetched.size > 0);
     } catch(e) {
