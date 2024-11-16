@@ -60,7 +60,7 @@ export async function sendNewProblem(client : any) {
     await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
 }
 
-async function sendWaitingMessage(client : any) {
+export async function sendWaitingMessage(client : any) {
     const guildId = config.guildId;
     const channelId = config.channelId;
     if(guildId == "") {
