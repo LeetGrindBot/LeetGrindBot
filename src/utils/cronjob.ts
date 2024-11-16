@@ -8,10 +8,19 @@ import {LeetCodeProblemInterface} from "../interfaces";
 import {createProblem} from "../database/historyProblem";
 import { cleanChannel } from './channelCleaner';
 
-export default function createJob(client : any) : CronJob {
+export function createLeetcodeJob(client : any) : CronJob {
     return new CronJob(
         '0 18 * * 1-5',
         () => sendNewProblem(client),
+        null,
+        false,
+        'Europe/Paris'
+    );
+}
+export function createWaitingMessageJob(client : any) : CronJob {
+    return new CronJob(
+        '0 18 * * 6',
+        () => sendWaitingMessage(client),
         null,
         false,
         'Europe/Paris'
@@ -49,4 +58,25 @@ export async function sendNewProblem(client : any) {
     .catch(err => log.error(err));
 
     await channel.send({embeds: [createEmbeds(problem.url, problem.title, difficulty)]});
+}
+
+async function sendWaitingMessage(client : any) {
+    const guildId = config.guildId;
+    const channelId = config.channelId;
+    if(guildId == "") {
+        log.error("Empty guildId");
+        return;
+    }
+    if(channelId == "") {
+        log.error("Empty channelId");
+        return;
+    }
+    
+    const guild = client.guilds.cache.get(guildId);
+    const channel = guild.channels.cache.get(channelId);
+    if(!channel) {
+        log.error('Channel was not found');
+    }
+    await cleanChannel(channel);
+    await channel.send("Pas de Challenge le week-end!\nRendez-vous lundi pour le prochain arc !")
 }
