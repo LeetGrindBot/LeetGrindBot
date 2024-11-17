@@ -2,6 +2,7 @@ import {CronJob} from 'cron';
 import getRandomProblem from "../utils/getProblem"
 import config from "../config/index";
 import createEmbeds from "../embeds/leetCodeEmbeds";
+import createWaitingEmbeds from '../embeds/waitingMessageEmbed';
 import {getRandomDifficulty} from "./getRandom";
 import log from "../logger";
 import {LeetCodeProblemInterface} from "../interfaces";
@@ -78,5 +79,5 @@ export async function sendWaitingMessage(client : any) {
         log.error('Channel was not found');
     }
     await cleanChannel(channel);
-    await channel.send("Pas de Challenge le week-end!\nRendez-vous lundi pour le prochain arc !")
+    await channel.send({embeds: [createWaitingEmbeds()]});
 }
