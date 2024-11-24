@@ -1,7 +1,7 @@
 import {Client, GatewayIntentBits} from "discord.js";
 
 import eventHandler from "./handlers/eventHandler";
-import createJob from "./utils/cronjob";
+import { createLeetcodeJob, createWaitingMessageJob } from "./utils/cronjob";
 import config from "./config/index";
 import log from "./logger";
 import {CronJob} from "cron";
@@ -22,5 +22,7 @@ client.login(config.discordToken).then(() :void => {
 
 eventHandler(client);
 
-const job: CronJob = createJob(client);
-job.start();
+const job1: CronJob = createLeetcodeJob(client);
+const job2: CronJob = createWaitingMessageJob(client);
+job1.start();
+job2.start();
