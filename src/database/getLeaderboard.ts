@@ -1,13 +1,10 @@
 import {PrismaClient} from '@prisma/client';
 import log from "../logger";
-import {getEndDate, getStartDate} from '../utils/dateUtils';
 import {GetLeadersBoardsInterface} from "../interfaces/getLeadersBoards.interface";
 
 const prisma = new PrismaClient();
 
-export async function getLeaderboard(date: Date, limit: number): Promise<GetLeadersBoardsInterface[]> {
-    const startDate = getStartDate(date);
-    const endDate = getEndDate(date);
+export async function getLeaderboard(startDate: Date, endDate: Date, limit: number): Promise<GetLeadersBoardsInterface[]> {
     log.info("[LOG | INFO | LEADERBOARD] : Generating leaderboard for dates : " + startDate.toLocaleDateString("fr-FR") + " " + endDate.toLocaleDateString("fr-FR") + ".");
     const scores = await prisma.historyPoint.groupBy({
         by: ['idDiscord'],
