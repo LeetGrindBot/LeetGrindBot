@@ -3,12 +3,12 @@ import {getLeaderboard} from "../../database/getLeaderboard";
 import log from "../../logger";
 import generateLeaderBoardImg from "../../utils/generateLeaderBoardImg";
 import GenerateLeaderBoardEmbed from "../../embeds/leaderBoardEmbeds";
-import { getEndOfWeekFromDate, getStartOfWeekFromDate } from "../../utils/dateUtils";
+import { getFirstOfMonthFromDate } from "../../utils/dateUtils";
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("generateleaderboard")
-        .setDescription("Génère le leaderboard de la semaine")
+        .setName("generatemonthlyleaderboard")
+        .setDescription("Génère le leaderboard du mois")
         .toJSON(),  // Ensure the command data is correctly transformed to JSON
     testMode: false,
     devOnly: false,
@@ -21,9 +21,8 @@ module.exports = {
         try {
             interaction.reply({ content: "Génération du leaderboard en cours...", ephemeral: true });
             const date = new Date();
-            const startOfWeek = getStartOfWeekFromDate(date);
-            const endOfWeek = getEndOfWeekFromDate(date);
-            const leaderboard = await getLeaderboard(startOfWeek, endOfWeek, 13);
+            const startOfMonth = getFirstOfMonthFromDate(date);
+            const leaderboard = await getLeaderboard(startOfMonth, date, 100);
             const attachment = await generateLeaderBoardImg(leaderboard, client);
             const embeds = await GenerateLeaderBoardEmbed(leaderboard, client);
 
