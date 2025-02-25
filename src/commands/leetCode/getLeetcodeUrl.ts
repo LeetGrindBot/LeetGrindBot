@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, TextChannel} from "discord.js";
-import getRandomProblem from "../../utils/getProblem";
+import getUniqueRandomProblem from "../../utils/getProblem";
 import {getRandomDifficulty} from "../../utils/getRandom";
 import createEmbeds from "../../embeds/leetCodeEmbeds"
 import log from "../../logger";
@@ -39,7 +39,7 @@ module.exports = {
 
             interaction.reply('Un nouveau test leetCode est entrain de charger sur la difficulté suivante : ' + choose);
 
-            const problem: LeetCodeProblemInterface = await getRandomProblem(choose);
+            const problem: LeetCodeProblemInterface = await getUniqueRandomProblem(choose);
 
             const guild = client.guilds.cache.get(interaction.guildId);
             const channel: TextChannel = guild.channels.cache.get(interaction.channelId);
