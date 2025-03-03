@@ -36,7 +36,8 @@ const GenerateLeaderBoardImg = async (
     },
   ];
 
-  for (let i = 0; i < 3; i++) {
+  const maxInd = Math.min(data.length, 3);
+  for (let i = 0; i < maxInd; i++) {
     const userData = data[i];
     const position = positions[i];
 
