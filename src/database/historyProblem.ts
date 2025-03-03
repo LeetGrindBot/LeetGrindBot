@@ -17,6 +17,18 @@ export async function createProblem(data: LeetCodeProblemInterface) {
     });
 }
 
+export async function containsProblem(url: string) : Promise<boolean> {
+    const result = await prisma.historyProblem.findFirst({
+        where: {
+            url: url
+        }
+    });
+    if(result) {
+        return true;
+    }
+    return false;
+}
+
 export async function getDifficulty(titleSlug: string) : Promise<number> {
     const res = await prisma.historyProblem.findUnique({
         where: {
