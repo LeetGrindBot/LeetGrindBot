@@ -29,6 +29,19 @@ export async function containsProblem(url: string) : Promise<boolean> {
     return false;
 }
 
+export async function listHistoryProblems() {
+    return await prisma.historyProblem.findMany({
+        select: {
+            code: true,
+            title: true,
+            titleSlug: true,
+            url: true,
+            rate: true,
+            difficulty: true
+        }
+    }); 
+}
+
 export async function getDifficulty(titleSlug: string) : Promise<number> {
     const res = await prisma.historyProblem.findUnique({
         where: {
