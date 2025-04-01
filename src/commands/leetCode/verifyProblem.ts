@@ -1,7 +1,7 @@
 import {SlashCommandBuilder} from "discord.js";
 import log from "../../logger";
 import {addPoints, verify} from "../../database/verifyProblem";
-import computePoints from "../../utils/computePoints";
+import {computePointsFromSlug} from "../../utils/computePoints";
 import {verifyLink} from "../../database/leetCodeLink";
 
 const validChar = ":white_check_mark:";
@@ -41,7 +41,7 @@ module.exports = {
             const titleSlug = verificationData.titleSlug;
             const lang = verificationData.lang;
             const langFormatted = lang[0].toUpperCase() + lang.slice(1);
-            const points = await computePoints(titleSlug);
+            const points = await computePointsFromSlug(titleSlug);
             const pointsFormatted = points.toFixed(2).toString();
             await addPoints(discordId, titleSlug, points).catch(async (err) => {
                 if(err.code == 'P2002') {
