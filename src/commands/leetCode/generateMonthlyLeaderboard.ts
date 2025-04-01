@@ -9,6 +9,12 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("generatemonthlyleaderboard")
         .setDescription("Génère le leaderboard du mois")
+        .addIntegerOption(option =>
+            option.setName('month')
+                .setDescription('month of the generated leaderboard'))
+        .addIntegerOption(option =>
+            option.setName('year')
+                .setDescription('year of the generated leaderboard'))
         .toJSON(),  // Ensure the command data is correctly transformed to JSON
     testMode: false,
     devOnly: false,
@@ -20,9 +26,13 @@ module.exports = {
     run: async (client: Client, interaction: any) => {
         try {
             interaction.reply({ content: "Génération du leaderboard en cours...", ephemeral: true });
-            const date = new Date();
-            const startOfMonth = getFirstOfMonthFromDate(date);
-            const leaderboard = await getLeaderboard(startOfMonth, date, 100);
+            const month: number = interaction.options.getInteger('month');
+            const year: number = interaction.options.getInteger('year');
+            let date = new Date(year, month, 1);
+            date.setDate(-1);
+            const endOfMonth = date;
+            const startOfMonth = getFirstOfMonthFromDate(endOfMonth);
+            const leaderboard = await getLeaderboard(startOfMonth, endOfMonth, 100);
             const attachment = await generateLeaderBoardImg(leaderboard, client);
             const embeds = await GenerateLeaderBoardEmbed(leaderboard, client);
 
