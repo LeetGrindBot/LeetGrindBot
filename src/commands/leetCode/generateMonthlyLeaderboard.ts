@@ -11,10 +11,12 @@ module.exports = {
         .setDescription("Génère le leaderboard du mois")
         .addIntegerOption(option =>
             option.setName('month')
-                .setDescription('month of the generated leaderboard'))
+                .setDescription('month of the generated leaderboard')
+                .setRequired(true))
         .addIntegerOption(option =>
             option.setName('year')
-                .setDescription('year of the generated leaderboard'))
+                .setDescription('year of the generated leaderboard')
+                .setRequired(true))
         .toJSON(),  // Ensure the command data is correctly transformed to JSON
     testMode: false,
     devOnly: false,
@@ -28,12 +30,13 @@ module.exports = {
             interaction.reply({ content: "Génération du leaderboard en cours...", ephemeral: true });
             const month: number = interaction.options.getInteger('month');
             const year: number = interaction.options.getInteger('year');
-            let date = new Date(year, month, 1);
+            let date = new Date(year, month-1, 1);
             const startOfMonth = new Date(date)
             startOfMonth.setDate(1);
             const endOfMonth = new Date(date);
-            endOfMonth.setDate(-1);
-            console.log("[LOG] Generating leaderboard for date : %s | %s", startOfMonth.toString(), endOfMonth.toString);
+            endOfMonth.setMonth(endOfMonth.getMonth()+1);
+            endOfMonth.setDate(0);
+            console.log("[LOG] Generating leaderboard for date : %s | %s", startOfMonth.toString(), endOfMonth.toString());
             const leaderboard = await getLeaderboard(startOfMonth, endOfMonth, 100);
             const attachment = await generateLeaderBoardImg(leaderboard, client);
             const embeds = await GenerateLeaderBoardEmbed(leaderboard, client);
