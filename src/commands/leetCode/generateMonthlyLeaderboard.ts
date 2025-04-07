@@ -29,9 +29,11 @@ module.exports = {
             const month: number = interaction.options.getInteger('month');
             const year: number = interaction.options.getInteger('year');
             let date = new Date(year, month, 1);
-            date.setDate(-1);
-            const endOfMonth = date;
-            const startOfMonth = getFirstOfMonthFromDate(endOfMonth);
+            const startOfMonth = new Date(date)
+            startOfMonth.setDate(1);
+            const endOfMonth = new Date(date);
+            endOfMonth.setDate(-1);
+            console.log("[LOG] Generating leaderboard for date : %s | %s", startOfMonth.toString(), endOfMonth.toString);
             const leaderboard = await getLeaderboard(startOfMonth, endOfMonth, 100);
             const attachment = await generateLeaderBoardImg(leaderboard, client);
             const embeds = await GenerateLeaderBoardEmbed(leaderboard, client);
